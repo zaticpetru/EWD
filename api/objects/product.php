@@ -115,5 +115,35 @@
                 $this->category_name = $row['category_name'];
             }
         }
+
+        function update() {
+            if($sqlQuery = $this->conn->prepare("
+                UPDATE
+                    ". $this->table_name ."
+                SET
+                    name = :name,
+                    price = :price,
+                    description = :description,
+                    category_id = :category_id
+                WHERE
+                    id = :id
+            ")) {
+                $this->name     = htmlspecialchars(strip_tags($this->name));
+                $this->price    = htmlspecialchars(strip_tags($this->price));
+                $this->description = htmlspecialchars(strip_tags($this->description));
+                $this->category_id = htmlspecialchars(strip_tags($this->category_id));
+                
+                $sqlQuery->bindParam(":id", $this->id);
+                $sqlQuery->bindParam(":name", $this->name);
+                $sqlQuery->bindParam(":price", $this->price);
+                $sqlQuery->bindParam(":description", $this->description);
+                $sqlQuery->bindParam(":category_id", $this->category_id);
+
+                if($sqlQuery->execute()) {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 ?>
