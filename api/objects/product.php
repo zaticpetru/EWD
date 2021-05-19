@@ -145,5 +145,21 @@
             }
             return false;
         }
+
+        function delete(){
+            if($sqlQuery = $this->conn->prepare("
+                DELETE FROM
+                    ". $this->table_name ."
+                WHERE
+                    id = :id
+            ")) {
+                $sqlQuery->bindParam(":id", $this->id);
+                
+                if($sqlQuery->execute()) {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 ?>

@@ -12,25 +12,22 @@
     $db = $database->getConnection();
 
     $product = new Product($db);
+
     $data = json_decode(file_get_contents("php://input"));
 
     if(!empty($data->id)){
         $product->id = $data->id;
-
-        $product->name = $data->name;
-        $product->price = $data->price;
-        $product->description = $data->description;
-        $product->category_id = $data->category_id;
-
-        if($product->update()) {
+        
+        if($product->delete()){
             http_response_code(200);
-            echo json_encode(array("message" => "Product was updated."));
+            echo json_encode(array("message" => "Product was deleted."));
         } else {
             http_response_code(503);
-            echo json_encode(array("message" => "Unable to update product"));
+            echo json_encode(array("message" => "Product was deleted"));
         }
     } else {
-        http_response_code(400);
-        echo json_encode(array("message" => "Unable to update product. No id provided."));
+        http_response_code(403);
+        echo json_encode(array("message" => "Unable to delete product. No id was provided."));
     }
+    
 ?>
