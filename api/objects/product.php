@@ -161,5 +161,39 @@
             }
             return false;
         }
+
+        function search($keywords){
+            if($sqlQuery = $this->conn->prepare("
+                SELECT 
+                    c.name as category_name,
+                    p.id,
+                    p.name,
+                    p.description,
+                    p.price,
+                    p.category_id,
+                    p.created
+                FROM ". $this->table_name ." as p
+                LEFT JOIN ". $this->category_table_name ." as c
+                ON p.category_id = c.id
+                WHERE
+                    p.name LIKE :keywords OR
+                    p.description LIKE :keywords OR
+                    c.name LIKE :keywords
+                ORDER BY
+                    p.created DESC
+            ")) {
+                
+                $keywords = htmlspecialchars(strip_tags($keywords));
+                $keywords = "%{$keywords}%";
+
+                $sqlQuery->bindParam(":keywords", $keywords);
+                
+                $sqlQuery->execute();
+                return $sqlQuery;
+
+            } else {
+                return null;
+            }
+        }
     }
 ?>
