@@ -4,13 +4,13 @@ import { STATE_UPDATED } from '../events/eventNames.js';
 class State {
     constructor() {
         this._state = {
-            "loading": false
+            loading : false
         }
     }
 
     set state(updatedState) {
         this._state = updatedState;
-        EventBus.dispatchEvent(STATE_UPDATED);
+        EventBus.dispatchEvent(STATE_UPDATED, {"new_state" : this._state});
     }
 
     get state() { return this._state; }

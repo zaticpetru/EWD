@@ -30,3 +30,24 @@ body {
         var(--main-pale-accent-color) 100%);
     min-height: 100vh;
 }
+
+main {
+    margin-right: auto;
+    margin-left:  auto;
+
+    max-width: 960px;
+
+    padding-right: 10px;
+    padding-left:  10px;
+
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: stretch;
+
+    min-height: 400px;
+}
+
+loading-component {
+    width: 100%;
+    text-align: center;
+}

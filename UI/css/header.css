@@ -1,19 +1,22 @@
-main-header header {
+main-header {
     align-items: center;
     display: flex;
     justify-content: center;
     cursor: pointer;
+    margin-bottom: 2vw;
 }
 
 main-header header h1 {
-    display: inline;
+    /* display: inline; */
     text-align: center;
     font-size: 50px;
     transition: 1s;
+    margin-top: 2vw;
 }
 
+
 main-header header h1:hover {
-    background: linear-gradient(90deg,var(--main-accent-color),var(--main-light-accent-color));
+    background: linear-gradient(120deg,var(--main-dark-color),var(--main-dark-accent-color));
     text-shadow: none;
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;

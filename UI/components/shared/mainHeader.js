@@ -12,6 +12,7 @@ export default class MainHeader extends HTMLElement {
             <header>
                 <h1>Just e-commerce, nothing more</h1>
                 <h3>enjoy shopping undisturbed )</h3>
+                <hr/>
             </header>
         `;
     }
