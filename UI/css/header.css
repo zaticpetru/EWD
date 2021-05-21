@@ -1,0 +1,21 @@
+main-header header {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+main-header header h1 {
+    display: inline;
+    text-align: center;
+    font-size: 50px;
+    transition: 1s;
+}
+
+main-header header h1:hover {
+    background: linear-gradient(90deg,var(--main-accent-color),var(--main-light-accent-color));
+    text-shadow: none;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+}

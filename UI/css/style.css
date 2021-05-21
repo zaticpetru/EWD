@@ -1,0 +1,32 @@
+:root {
+    --main-dark-color: #000A0D;
+    --main-dark-accent-color: #593239;
+    --main-light-accent-color: #D9B8BB;
+    --main-pale-accent-color: #BF8E97;
+    --main-accent-color: #BF6979;
+
+    --main-text-color: #000A0D;
+    
+
+    --main-border-radius: 10px;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Tenali Ramakrishna', sans-serif;
+    color: var(--main-text-color);
+    background: var(--main-light-accent-color);
+    background: linear-gradient(38deg, 
+        var(--main-light-accent-color) 0%,
+        var(--main-pale-accent-color) 100%);
+    min-height: 100vh;
+}
