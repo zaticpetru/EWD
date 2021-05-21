@@ -17,7 +17,7 @@
             $this->conn = $db;
         }
 
-        function read() {
+        public function readAll() {
             if($sqlQuery = $this->conn->prepare("
                 SELECT 
                     c.name as category_name,
@@ -41,7 +41,7 @@
             return null;
         }
 
-        function create() {
+        public function create() {
             if($sqlQuery = $this->conn->prepare("
                 INSERT INTO
                 ". $this->table_name ."
@@ -85,7 +85,7 @@
             return false;
         }
 
-        function readOne(){
+        public function readOne(){
             if($sqlQuery = $this->conn->prepare("
                 SELECT 
                     c.name as category_name,
@@ -116,7 +116,7 @@
             }
         }
 
-        function update() {
+        public function update() {
             if($sqlQuery = $this->conn->prepare("
                 UPDATE
                     ". $this->table_name ."
@@ -146,7 +146,7 @@
             return false;
         }
 
-        function delete(){
+        public function delete(){
             if($sqlQuery = $this->conn->prepare("
                 DELETE FROM
                     ". $this->table_name ."
@@ -162,7 +162,7 @@
             return false;
         }
 
-        function search($keywords){
+        public function search($keywords){
             if($sqlQuery = $this->conn->prepare("
                 SELECT 
                     c.name as category_name,
