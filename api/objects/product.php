@@ -191,9 +191,47 @@
                 $sqlQuery->execute();
                 return $sqlQuery;
 
-            } else {
-                return null;
             }
+            return null;
+        }
+
+        public function readPaging($from_record_num, $records_per_page) {
+            if($sqlQuery = $this->conn->prepare("
+                SELECT
+                    c.name as category_name,
+                    p.id,
+                    p.name,
+                    p.description,
+                    p.price,
+                    p.category_id,
+                    p.created
+                FROM ". $this->table_name ." as p
+                LEFT JOIN ". $this->category_table_name ." as c
+                ON p.category_id = c.id
+                ORDER BY
+                    p.created DESC
+                LIMIT :from, :nr_records;
+            ")) {
+                $sqlQuery->bindParam(":from", $from_record_num, PDO::PARAM_INT);
+                $sqlQuery->bindParam(":nr_records", $records_per_page, PDO::PARAM_INT);
+
+                $sqlQuery->execute();
+                return $sqlQuery;
+            }
+            return null;
+        }
+
+        public function count() {
+            if($sqlQuery = $this->conn->prepare("
+                SELECT COUNT(id) as total_rows
+                FROM ". $this->table_name ."
+            ")) {
+                $sqlQuery->execute();
+                $row = $sqlQuery->fetch(PDO::FETCH_ASSOC);
+
+                return $row['total_rows'];
+            }
+            return 0;
         }
     }
 ?>
