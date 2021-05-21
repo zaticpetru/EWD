@@ -108,11 +108,13 @@
                 $sqlQuery->execute();
                 $row = $sqlQuery->fetch(PDO::FETCH_ASSOC);
 
-                $this->name = $row['name'];
-                $this->price = $row['price'];
-                $this->description = $row['description'];
-                $this->category_id = $row['category_id'];
-                $this->category_name = $row['category_name'];
+                if($row) {
+                    $this->name = $row['name'];
+                    $this->price = $row['price'];
+                    $this->description = $row['description'];
+                    $this->category_id = $row['category_id'];
+                    $this->category_name = $row['category_name'];
+                }
             }
         }
 
@@ -232,6 +234,30 @@
                 return $row['total_rows'];
             }
             return 0;
+        }
+
+        public function readByCategory() {
+            if($sqlQuery = $this->conn->prepare("
+                SELECT 
+                    c.name as category_name,
+                    p.id,
+                    p.name,
+                    p.description,
+                    p.price,
+                    p.category_id,
+                    p.created
+                FROM ". $this->table_name ." as p
+                LEFT JOIN ". $this->category_table_name ." as c
+                ON p.category_id = c.id
+                WHERE
+                    c.id = :id
+            ")) {
+                $sqlQuery->bindParam(":id", $this->category_id);
+
+                $sqlQuery->execute();
+                return $sqlQuery;
+            }
+            return null;
         }
     }
 ?>
