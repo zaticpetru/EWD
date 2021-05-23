@@ -16,6 +16,7 @@
 
     if($count > 0) {
         $products_array = array();
+        $products_array["category_name"] = array();
         $products_array["records"] = array();
 
         while($row = $result->fetch(PDO::FETCH_ASSOC)) {
@@ -32,6 +33,8 @@
 
             array_push($products_array["records"], $product_item);
         }
+
+        $products_array["category_name"] =  $products_array["records"][0]["category_name"];
 
         http_response_code(200);
         echo json_encode($products_array);
