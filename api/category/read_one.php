@@ -20,6 +20,7 @@
             "id" =>  $category->id,
             "name" => $category->name,
             "description" => $category->description,
+            "productCount" => $category->productCount($category->id)
         );
 
         http_response_code(200);

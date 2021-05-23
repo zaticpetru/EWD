@@ -1,6 +1,6 @@
 import { GS } from '../../state/state.js';
 import { EventBus } from '../../events/eventBus.js';
-import { CATEGORIES_FETCHED } from '../../events/eventNames.js';
+import { CATEGORIES_FETCHED, ADD_TO_CART } from '../../events/eventNames.js';
 import CardComponent from '../shared/cardComponent.js';
 import ModalComponent from '../shared/modalComponent.js';
 
@@ -17,7 +17,7 @@ export default class CategoriesComponent extends HTMLElement {
 
         this._categories.forEach(category => {
             html.push(/*html*/`
-                <card-component title="${category.name}" subtitle="Nr. products: ${category.id}">
+                <card-component title="${category.name}" subtitle="Nr. products: ${category.productCount}">
                     ${category.description}
                     <br/>
                     <button data-id=${category.id} class="showCategory">ShowCategory</button>
@@ -29,12 +29,11 @@ export default class CategoriesComponent extends HTMLElement {
         categoriesContainer.insertAdjacentHTML("beforeend", html.join("\n"));
 
         this.querySelectorAll('.categories button').forEach((btn) => {
-            btn.addEventListener("click", (event) => {
+            btn.addEventListener("click", event => {
+                event.preventDefault();
                 const id = event.target.getAttribute("data-id");
-                console.log("id", id);
-
                 this.fetchCategoryWithProducts(id);
-            })
+            });
         });
     }
 
@@ -75,7 +74,10 @@ export default class CategoriesComponent extends HTMLElement {
                 this.showModal(categoryId, data.records, data.category_name);
             }
         }).catch(err => {
-            console.warn('Error ocurred', err);
+                if(err.status == 404) {
+                    alert("No products in this category.");
+                }
+                console.warn('Error ocurred', err);
         });
     }
 
@@ -89,7 +91,7 @@ export default class CategoriesComponent extends HTMLElement {
                 <card-component title="${product.name} - ${product.price}" subtitle="Category: ${product.category_name}">
                     ${product.description}
                     <br/>
-                    <button onClick="console.log(${product.id})"> Click me</button>
+                    <button class="addToCartBtn" data-product-id=${product.id} data-product-quantity=1> Add to cart</button>
                 </card-component>
             `);
         });
@@ -99,7 +101,22 @@ export default class CategoriesComponent extends HTMLElement {
         
         modalComponent.updateModal(htmlContent, categoryName, productCount);
         modalComponent.querySelector(".modal").style.display = "block";
-        console.log(this);
+
+        modalComponent.querySelectorAll(".addToCartBtn").forEach(button => {
+            button.removeEventListener("click", this.addToCart);
+            button.addEventListener("click", this.addToCart);
+        });
+    }
+
+    addToCart(event) {
+        event.preventDefault();
+        const productId = event.target.getAttribute("data-product-id");
+        const quantity = event.target.getAttribute("data-product-quantity");
+        
+        EventBus.dispatchEvent(ADD_TO_CART, {
+            "productId" : productId,
+            "quantity" : quantity
+        });
     }
 
     render() {

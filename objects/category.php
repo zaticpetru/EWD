@@ -33,6 +33,26 @@
             return null;
         }
 
+        public function productCount($categoryId) {
+            if($sqlQuery = $this->conn->prepare("
+                SELECT
+                    COUNT(id) as total_rows
+                FROM
+                    ". $this->products_table_name ."
+                WHERE
+                    category_id = :id
+            ")) {
+                $sqlQuery->bindParam(":id", $categoryId);
+
+                $sqlQuery->execute();
+
+                $row = $sqlQuery->fetch(PDO::FETCH_ASSOC);
+
+                return $row['total_rows'];
+            }
+            return 0;
+        }
+
         public function readOne(){
             if($sqlQuery = $this->conn->prepare("
                 SELECT 

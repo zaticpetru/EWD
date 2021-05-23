@@ -1,6 +1,6 @@
 import { GS } from '../../state/state.js';
 import { EventBus } from '../../events/eventBus.js';
-import { PRODUCTS_FETCHED } from '../../events/eventNames.js';
+import { PRODUCTS_FETCHED, ADD_TO_CART } from '../../events/eventNames.js';
 import CardComponent from '../shared/cardComponent.js';
 
 export default class ProductsComponent extends HTMLElement {
@@ -45,13 +45,28 @@ export default class ProductsComponent extends HTMLElement {
                 <card-component title="${product.name} - ${product.price}" subtitle="Category: ${product.category_name}">
                     ${product.description}
                     <br/>
-                    <button onClick="console.log(${product.id})"> Click me</button>
+                    <button class="addToCartBtn" data-product-id=${product.id} data-product-quantity=1> Add to cart</button>
                 </card-component>
             `);
         });
         html.push('</div>');
         
         productContainer.insertAdjacentHTML("beforeend", html.join("\n"));
+        productContainer.querySelectorAll(".addToCartBtn").forEach(button => {
+            button.removeEventListener("click", this.addToCart);
+            button.addEventListener("click", this.addToCart);
+        });
+    }
+    
+    addToCart(event) {
+            event.preventDefault();
+            const productId = event.target.getAttribute("data-product-id");
+            const quantity = event.target.getAttribute("data-product-quantity");
+            
+            EventBus.dispatchEvent(ADD_TO_CART, {
+                "productId" : productId,
+                "quantity" : quantity
+            });
     }
 
     render() {

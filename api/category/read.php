@@ -23,7 +23,8 @@
             $category_item = array(
                 "id" => $id,
                 "name" => $name,
-                "description" => html_entity_decode($description)
+                "description" => html_entity_decode($description),
+                "productCount" => $category->productCount($id)
             );
             array_push($categories_array["records"], $category_item);
         }
