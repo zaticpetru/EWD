@@ -33,7 +33,7 @@ export default class CategoriesComponent extends HTMLElement {
                 const id = event.target.getAttribute("data-id");
                 console.log("id", id);
 
-                this.showModal(id);
+                this.fetchCategoryWithProducts(id);
             })
         });
     }
@@ -63,10 +63,42 @@ export default class CategoriesComponent extends HTMLElement {
         });
     }
 
-    showModal(categoryId) {
+    fetchCategoryWithProducts(categoryId) {
+        fetch(`http://localhost/EWD/api/product/read_by_category.php?id=${categoryId}`).then(response => {
+            if(response.ok) {
+                return response.json();
+            } else {
+                return Promise.reject(response);
+            }
+        }).then(data => {
+            if(data.records){
+                this.showModal(categoryId, data.records);
+            }
+        }).catch(err => {
+            console.warn('Error ocurred', err);
+        });
+    }
+
+    showModal(categoryId, products) {
         const modalComponent = this.querySelector("modal-component");
 
-        modalComponent.updateModal(`Category ID : ${categoryId}`);
+        var htmlContent = [ '<div class="cards">' ];
+
+        products.forEach(product => {
+            htmlContent.push(/*html*/`
+                <card-component title="${product.name} - ${product.price}" subtitle="Category: ${product.category_name}">
+                    ${product.description}
+                    <br/>
+                    <button onClick="console.log(${product.id})"> Click me</button>
+                </card-component>
+            `);
+        });
+        htmlContent.push('</div>');
+
+        const categoryName = `This is category name fetched: ${categoryId}`;
+        const productCount = 10;
+        
+        modalComponent.updateModal(htmlContent, categoryName, productCount);
         modalComponent.querySelector(".modal").style.display = "block";
         console.log(this);
     }

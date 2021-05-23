@@ -12,8 +12,11 @@ export default class ModalComponent extends HTMLElement {
         this.render();
     }
 
-    updateModal(body){
+    updateModal(body, modalHeader, modalFooter){
         this.body = body;
+        this.modalHeader = modalHeader;
+        this.modalFooter = modalFooter;
+
         this.render();
     }
 
