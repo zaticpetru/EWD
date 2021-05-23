@@ -42,7 +42,7 @@ export default class ProductsComponent extends HTMLElement {
 
         this._products.forEach(product => {
             html.push(/*html*/`
-                <card-component title="${product.name} - ${product.price}" subtitle="Category: ${product.category_name}">
+                <card-component title="${product.name} - ${product.price}$" subtitle="Category: ${product.category_name}">
                     ${product.description}
                     <br/>
                     <button class="addToCartBtn" data-product-id=${product.id} data-product-quantity=1> Add to cart</button>
@@ -57,7 +57,7 @@ export default class ProductsComponent extends HTMLElement {
             button.addEventListener("click", this.addToCart);
         });
     }
-    
+
     addToCart(event) {
             event.preventDefault();
             const productId = event.target.getAttribute("data-product-id");

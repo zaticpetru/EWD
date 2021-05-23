@@ -2,6 +2,7 @@ import TabItem from './tabs/tabItem.js';
 import PopularProductsComponent from './tabs/popularProductsComponent.js';
 import ProductsComponent from './tabs/productsComponent.js';
 import CategoriesComponent from './tabs/categoriesComponent.js';
+import CartComponent from './tabs/cartComponent.js';
 
 export default class TabsContainer extends HTMLElement {
     constructor() {
@@ -55,7 +56,7 @@ export default class TabsContainer extends HTMLElement {
                 <categories-component></categories-component>
             </tab-item>
             <tab-item id="Cart">
-                <h1>Demo of cart component</h1>
+                <cart-component></cart-component>
             </tab-item>
 
         `;

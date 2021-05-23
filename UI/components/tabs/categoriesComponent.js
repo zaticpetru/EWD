@@ -88,7 +88,7 @@ export default class CategoriesComponent extends HTMLElement {
 
         products.forEach(product => {
             htmlContent.push(/*html*/`
-                <card-component title="${product.name} - ${product.price}" subtitle="Category: ${product.category_name}">
+                <card-component title="${product.name} - ${product.price}$" subtitle="Category: ${product.category_name}">
                     ${product.description}
                     <br/>
                     <button class="addToCartBtn" data-product-id=${product.id} data-product-quantity=1> Add to cart</button>
