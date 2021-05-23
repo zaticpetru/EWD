@@ -13,13 +13,6 @@ class RootApp extends HTMLElement {
 
     connectedCallback() {
         this.render();
-        this._local_copy = GS.state;
-
-        EventBus.addEventListener(STATE_UPDATED, event => {
-            console.log(this._local_copy);
-            console.log(GS.state);
-            console.log(event);
-        });
     }
 
 

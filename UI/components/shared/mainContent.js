@@ -8,22 +8,16 @@ import LoadingComponent from './loadingComponent.js';
 export default class MainContent extends HTMLElement {
     constructor() {
         super();
-    }
-
-    connectedCallback() {
-        this._loading = GS.state.loading;
-
-        this.render();
-        console.log(GS.state);
-        console.log(this._loading);
-
         EventBus.addEventListener(STATE_UPDATED, event => {
-            // this.querySelector("h1").innerHTML += "test";
-            console.log(event);
             this._loading = GS.state.loading;
             
             this.render();
         });
+    }
+
+    connectedCallback() {
+        this._loading = GS.state.loading;
+        this.render();
     }
 
     render() {
