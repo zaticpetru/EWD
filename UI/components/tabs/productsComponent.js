@@ -1,34 +1,23 @@
 import { GS } from '../../state/state.js';
 import { EventBus } from '../../events/eventBus.js';
-// import { STATE_UPDATED } from '../events/eventNames.js';
+import { PRODUCTS_FETCHED } from '../../events/eventNames.js';
+import CardComponent from '../shared/cardComponent.js';
 
 export default class ProductsComponent extends HTMLElement {
     constructor() {
         super();
         this._products = [];
         this._products_loading = true;
+
         this.fetchProducts();
     }
 
     connectedCallback() {
         this.render();
-        var doc = this;
-
-        EventBus.addEventListener("PF", _ => {
-            if(this._products_loading) {
-                this.querySelector("loading-component").style.display = "block";
-                this.querySelector(".products").style.display = "none";
-            } else {
-                this.renderProducts(doc.querySelector(".products"));
-
-                this.querySelector("loading-component").style.display = "none";
-                this.querySelector(".products").style.display = "block";
-            }
-        });
     }
 
     fetchProducts() {
-        var doc = this;
+        const doc = this;
 
         fetch('http://localhost/EWD/api/product/read.php').then(response => {
             if(response.ok) {
@@ -41,7 +30,7 @@ export default class ProductsComponent extends HTMLElement {
                 doc._products = data.records;
                 doc._products_loading = false;
 
-                EventBus.dispatchEvent("PF");
+                EventBus.dispatchEvent(PRODUCTS_FETCHED);
             }
         }).catch(err => {
             console.warn('Error ocurred', err);
@@ -49,23 +38,41 @@ export default class ProductsComponent extends HTMLElement {
     }
 
     renderProducts(productContainer) {
-        var html = []
+        var html = [ '<div class="cards">' ];
 
         this._products.forEach(product => {
-            html.push(`<p>id : ${product.id}, name : ${product.name}</p>`);
+            html.push(/*html*/`
+                <card-component title="${product.name} - ${product.price}" subtitle="Category: ${product.category_name}">
+                    ${product.description}
+                    <br/>
+                    <button onClick="console.log(${product.id})"> Click me</button>
+                </card-component>
+            `);
         });
-
+        html.push('</div>');
+        
         productContainer.insertAdjacentHTML("beforeend", html.join("\n"));
     }
 
     render() {
         this.innerHTML = /*html*/ `
-            <h1>Products Component</h1>
             <loading-component></loading-component>
             <div class="products">
-                list of products
             </div>
         `;
+
+        
+        EventBus.addEventListener(PRODUCTS_FETCHED, _ => {
+            if(this._products_loading) {
+                this.querySelector("loading-component").style.display = "block";
+                this.querySelector(".products").style.display = "none";
+            } else {
+                this.renderProducts(this.querySelector(".products"));
+
+                this.querySelector("loading-component").style.display = "none";
+                this.querySelector(".products").style.display = "block";
+            }
+        });
     }
 }
 
