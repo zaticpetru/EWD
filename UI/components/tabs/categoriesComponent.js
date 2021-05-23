@@ -72,14 +72,14 @@ export default class CategoriesComponent extends HTMLElement {
             }
         }).then(data => {
             if(data.records){
-                this.showModal(categoryId, data.records);
+                this.showModal(categoryId, data.records, data.category_name);
             }
         }).catch(err => {
             console.warn('Error ocurred', err);
         });
     }
 
-    showModal(categoryId, products) {
+    showModal(categoryId, products, categoryName) {
         const modalComponent = this.querySelector("modal-component");
 
         var htmlContent = [ '<div class="cards">' ];
@@ -95,8 +95,7 @@ export default class CategoriesComponent extends HTMLElement {
         });
         htmlContent.push('</div>');
 
-        const categoryName = `This is category name fetched: ${categoryId}`;
-        const productCount = 10;
+        const productCount = `Products in category: ${products.length}`;
         
         modalComponent.updateModal(htmlContent, categoryName, productCount);
         modalComponent.querySelector(".modal").style.display = "block";
