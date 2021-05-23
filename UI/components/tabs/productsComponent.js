@@ -51,6 +51,7 @@ export default class ProductsComponent extends HTMLElement {
         });
         html.push('</div>');
         
+        productContainer.innerHTML = "";
         productContainer.insertAdjacentHTML("beforeend", html.join("\n"));
         productContainer.querySelectorAll(".addToCartBtn").forEach(button => {
             button.removeEventListener("click", this.addToCart);

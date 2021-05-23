@@ -22,3 +22,20 @@ main-header header h1:hover {
     -webkit-background-clip: text;
     background-clip: text;
 }
+
+main-footer {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    margin-top: 2vw;
+    margin-bottom: 3vw;
+}
+
+main-header footer h3 {
+    /* display: inline; */
+    text-align: center;
+    font-size: 25px;
+    transition: 1s;
+    margin-top: 2vw;
+}
