@@ -1,0 +1,305 @@
+{
+	"info": {
+		"_postman_id": "3e3fcfaa-cae6-49e3-ad69-4a8ea212c4cf",
+		"name": "EWD_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "PRODUCTS",
+			"item": [
+				{
+					"name": "GET_PRODUCTS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/EWD/api/product/read.php",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"EWD",
+								"api",
+								"product",
+								"read.php"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET_PRODUCT_BY_ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/EWD/api/product/read_one.php?id=71",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"EWD",
+								"api",
+								"product",
+								"read_one.php"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "71"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET_PRODUCTS_WITH_CATEGORY_ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/EWD/api/product/read_by_category.php?id=2",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"EWD",
+								"api",
+								"product",
+								"read_by_category.php"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET_PAGING",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/EWD/api/product/read_paging.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"EWD",
+								"api",
+								"product",
+								"read_paging.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET_PAGING_WITH_PAGE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/EWD/api/product/read_paging.php?page=3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"EWD",
+								"api",
+								"product",
+								"read_paging.php"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SEARCH_PRODUCT(by name, category name, description)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/EWD/api/product/search.php?s=shirt",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"EWD",
+								"api",
+								"product",
+								"search.php"
+							],
+							"query": [
+								{
+									"key": "s",
+									"value": "shirt"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE_PRODUCT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Amazing Pillow 9.5\",\r\n    \"price\" : \"499\",\r\n    \"description\" : \"The best pillow for amazing programmers.\",\r\n    \"category_id\" : 2,\r\n    \"created\" : \"2018-06-01 00:35:07\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/EWD/api/product/create.php",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"EWD",
+								"api",
+								"product",
+								"create.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE_PRODUCT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : 71,\r\n    \"name\" : \"Amazing Pillow UPDATED\",\r\n    \"price\" : \"499\",\r\n    \"description\" : \"The best pillow for amazing programmers.\",\r\n    \"category_id\" : 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/EWD/api/product/update.php",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"EWD",
+								"api",
+								"product",
+								"update.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE_PRODUCT",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : 69\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/EWD/api/product/delete.php",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"EWD",
+								"api",
+								"product",
+								"delete.php"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CATEGORIES",
+			"item": [
+				{
+					"name": "GET_CATEGORIES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/EWD/api/category/read.php",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"EWD",
+								"api",
+								"category",
+								"read.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET_CATEGORY_BY_ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/EWD/api/category/read_one.php?id=13",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"EWD",
+								"api",
+								"category",
+								"read_one.php"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "13"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
