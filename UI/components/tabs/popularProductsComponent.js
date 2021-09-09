@@ -1,5 +1,5 @@
 import { EventBus } from '../../events/eventBus.js';
-import { POPULAR_PRODUCTS_FETCHED } from '../../events/eventNames.js';
+import { POPULAR_PRODUCTS_FETCHED, ADD_TO_CART } from '../../events/eventNames.js';
 import LoadingComponent from '../shared/loadingComponent.js';
 
 

@@ -32,10 +32,10 @@ export default class TabsContainer extends HTMLElement {
     render() {
         this.innerHTML = /*html*/ `
             <div class="tab">
-                <button class="tabLinks" data-id="PopularProducts">
+                <button class="tabLinks active" data-id="PopularProducts">
                     Popular Products
                 </button>
-                <button class="tabLinks active" data-id="AllProducts">
+                <button class="tabLinks" data-id="AllProducts">
                     All Products
                 </button>
                 <button class="tabLinks" data-id="Categories">
@@ -46,10 +46,10 @@ export default class TabsContainer extends HTMLElement {
                 </button>
             </div>
 
-            <tab-item id="PopularProducts">
+            <tab-item class="active" id="PopularProducts">
                 <popular-products-component></popular-products-component>
             </tab-item>
-            <tab-item class="active" id="AllProducts">
+            <tab-item id="AllProducts">
                 <products-component></products-component>
             </tab-item>
             <tab-item id="Categories">

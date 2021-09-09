@@ -1,7 +1,7 @@
 <?php
     class Database {
-        private $host = "";
-        private $db = "";
+        private $host = "localhost";
+        private $db = "ewd_database";
         private $username  = "root";
         private $password = "";
         private $options = array(

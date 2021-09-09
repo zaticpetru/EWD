@@ -31,7 +31,7 @@
 
             array_push($products_array["records"], $product_item);
         }
-
+        sleep(1);
         http_response_code(200);
         echo json_encode($products_array);
     } else {

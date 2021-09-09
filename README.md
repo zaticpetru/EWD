@@ -1,2 +1,4 @@
 # EWD
-Project for EWD course
+
+http://localhost/ewd/ui/
+Pentru a acesa parte de UI a aplicatiei
